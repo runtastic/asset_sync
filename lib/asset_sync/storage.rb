@@ -111,7 +111,9 @@ module AssetSync
       end
     end
 
-    def delete_extra_remote_files(files_to_keep = [])
+    def delete_extra_remote_files(opts = {})
+      files_to_keep = opts.fetch(:files_to_keep, [])
+
       log "Fetching files to flag for delete"
       remote_files = get_remote_files
       # fixes: https://github.com/rumblelabs/asset_sync/issues/19
