@@ -111,11 +111,11 @@ module AssetSync
       end
     end
 
-    def delete_extra_remote_files
+    def delete_extra_remote_files(files_to_keep = [])
       log "Fetching files to flag for delete"
       remote_files = get_remote_files
       # fixes: https://github.com/rumblelabs/asset_sync/issues/19
-      from_remote_files_to_delete = remote_files - local_files - ignored_files - always_upload_files
+      from_remote_files_to_delete = remote_files - local_files - ignored_files - always_upload_files - files_to_keep
 
       log "Flagging #{from_remote_files_to_delete.size} file(s) for deletion"
       # Delete unneeded remote files
